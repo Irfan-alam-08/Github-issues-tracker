@@ -4,85 +4,12 @@
 .font-bangla {
   font-family: "Hind Siliguri", sans-serif;
 }
-
-
-/* *,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 body {
-  font-family: "DM Sans", sans-serif;
+  background-color: #F8FAFC;
+  height: 100vh;
+  width: 100vw;
 }
-.custom-input {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1.5px solid #d1d5db;
-  border-radius: 9px;
-  font-size: 0.875rem;
-  color: #374151;
-  background: #fff;
-  outline: none;
-  font-family: inherit;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-.custom-input::placeholder {
-  color: #9ca3af;
-}
-.custom-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px #e0e7ff;
-}
-.btn-brand {
-  width: 100%;
-  padding: 13px;
-  background: #4f46e5;
-  color: #fff;
-  border: none;
-  border-radius: 9px;
-  font-size: 0.97rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition:
-    background 0.15s,
-    transform 0.1s;
-}
-.btn-brand:hover {
-  background: #4338ca;
-}
-.btn-brand:active {
-  transform: scale(0.98);
-}
-.divider-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #9ca3af;
-  font-size: 0.78rem;
-  width: 100%;
-  margin: 22px 0 16px;
-}
-.divider-row::before,
-.divider-row::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #e5e7eb;
-}
-.hint {
-  color: #6366f1;
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-top: 5px;
-}
-.error-shake {
-  animation: shake 0.35s ease;
-} */
+
 @keyframes shake {
   0%,
   100% {
