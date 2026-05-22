@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title and logo -->
+    <title>Github Issues tracker</title>
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- font integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins&display=swap"
+        rel="stylesheet">
+
+    <!-- tailwind and daisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar bg-base-100 md:px-20 shadow-sm md:flex-row flex-col items-center gap-2">
+            <div class="navbar-start md:justify-start justify-center">
+                <a class="btn btn-ghost normal-case text-xl" href="">
+                    <img src="./assets/github-logo.png" alt="GitHub Logo" class="h-8 w-8 ">
+                    GitHub Issues Tracker
+                </a>
+            </div>
+            <div class="navbar-end md:justify-end justify-center">
+                <div class="flex gap-2">
+                    <label class="input input-bordered flex items-center gap-2">
+                        <i class="fa-brands fa-sistrix text-gray-500"></i>
+                        <input id="search-input" type="search" class="grow" placeholder="Search Issues..." />
+                    </label>
+                    <button id="new-issue-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-plus"></i>
+                        New Issue</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+</body>
+<!-- scripts -->
+<script src="./scripts/main.js"></script>
+
+</html>
