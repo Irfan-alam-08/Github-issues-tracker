@@ -7,12 +7,50 @@ function handleSignIn() {
         alert('❌ Invalid credentials. Use admin / admin123');
     }
 }
+// showloader
+const loadBox = document.getElementById("loader-container")
+const showLoader = () => {
+    loadBox.classList.remove("hidden");
+};
+const hideLoader = () => {
+    loadBox.classList.add("hidden");
+};
+
+const allBtn = document.getElementById("allFilter-btn");
+const openBtn = document.getElementById("allFilter-btn");
+const closedBtn = document.getElementById("closedFilter-btn");
+
+function setActiveButton(activeBtn) {
+    const filterButtons = document.querySelectorAll(".filter-button");
+
+    filterButtons.forEach(button => {
+        if (button === activeBtn) {
+            button.classList.add("bg-gray-700", "text-white");
+            button.classList.remove("border-gray-700");
+        } else {
+            button.classList.remove("bg-gray-700", "text-white");
+            button.classList.add("border-gray-700");
+        }
+    });
+}
+window.addEventListener("DOMContentLoaded", function () {
+    setActiveButton(allBtn);
+});
+
 // Fetch and display issues
 const loadAllIssues = () => {
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+    
     fetch(url)
         .then((res) => res.json())
-        .then((data) => displayIssues(data.data));
+        .then((data) => { 
+            showLoader();
+            setTimeout(() => {
+                hideLoader();
+                displayIssues(data.data);
+            }, 400);
+        });
+        
 };
 loadAllIssues();
 
@@ -98,3 +136,5 @@ const displayIssues = (issues) => {
         issuesContainer.appendChild(issueElement);
     });
 };
+
+
