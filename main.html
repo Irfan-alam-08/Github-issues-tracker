@@ -43,7 +43,7 @@
                 <div class="flex gap-2">
                     <label class="input input-bordered flex items-center gap-2">
                         <i class="fa-brands fa-sistrix text-gray-500"></i>
-                        <input id="search-input" type="search" class="grow" placeholder="Search Issues..." />
+                        <input id="search-bar" type="search" class="grow" placeholder="Search Issues..." />
                     </label>
                     <button id="new-issue-btn" class="btn btn-primary">
                         <i class="fa-solid fa-plus"></i>
@@ -83,7 +83,11 @@
         <span class="loading loading-spinner text-error"></span>
     </div>
 
-    <!-- Issue cards -->
+    <div id="no-issue-container" class="flex items-center justify-center w-9/12 mx-auto rounded-xl bg-base-200 p-40 hidden">
+        <h3 class="text-3xl font-semibold text-gray-500">No issues found</h3>
+    </div>
+
+    <!-- Issue cards section -->
     <section id="issues-container" class="w-9/12 mx-auto rounded-xl p-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 bg-base-200">
         
     </section>

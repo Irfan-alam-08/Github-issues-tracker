@@ -60,8 +60,15 @@ const loadAllIssues = async () => {
         alert("Failed to fetch issues");
 
     } finally {
-        // always hide loader
+
+        // re-render All issue cards while something is typed in searchbar
+        const noIssue = document.getElementById("no-issue-container");
+        noIssue.classList.add("hidden");
+        const issues = document.getElementById("issues-container")
+        issues.classList.remove("hidden");
+
         hideLoader();
+        clearSearch();
     }
 };
 loadAllIssues();
@@ -73,6 +80,11 @@ const displayIssues = (issues) => {
         return;
     }
     issuesContainer.innerHTML = '';
+
+    // shows issues count on UI with a animation
+    animateCount("issue-counter", "all", issues.length);
+
+
     issues.forEach((issue) => {
         const status = issue.status.toLowerCase();
         const priority = issue.priority.toLowerCase();
@@ -146,11 +158,6 @@ const displayIssues = (issues) => {
                 </div>
         `;
         issuesContainer.appendChild(issueElement);
-        
-        const issueCount = allIssuesData.length;
-        const setCount = document.getElementById("issue-counter");
-        setCount.innerText = issueCount;
-
     });
 };
 
@@ -162,15 +169,22 @@ const openFilter = () => {
         const openIssues = allIssuesData.filter(issue =>
             issue.status.toLowerCase() === "open"
         );
+
         // display open issues on UI
         displayIssues(openIssues);
         // set active style
         setActiveButton(openBtn);
 
-        const issueCount = openIssues.length;
-        const setCount = document.getElementById("issue-counter");
-        setCount.innerText = issueCount;
+        // shows issues count on UI with a animation
+        animateCount("issue-counter", "open", openIssues.length);
 
+        // re-render open issue cards while something is typed in searchbar
+        const noIssue = document.getElementById("no-issue-container");
+        noIssue.classList.add("hidden");
+        const issues = document.getElementById("issues-container")
+        issues.classList.remove("hidden");
+
+        clearSearch();
         hideLoader();
     }, 80);
 };
@@ -183,15 +197,117 @@ const closedFilter = () => {
         const closedIssues = allIssuesData.filter(issue =>
             issue.status.toLowerCase() === "closed"
         );
+
         // display closed issues on UI
         displayIssues(closedIssues);
         // set active style
         setActiveButton(closedBtn);
 
-        const issueCount = closedIssues.length;
-        const setCount = document.getElementById("issue-counter");
-        setCount.innerText = issueCount;
+        // shows issues count on UI with a animation
+        animateCount("issue-counter", "closed", closedIssues.length);
 
+        // re-render closed issue cards while something is typed in searchbar
+        const noIssue = document.getElementById("no-issue-container");
+        noIssue.classList.add("hidden");
+        const issues = document.getElementById("issues-container")
+        issues.classList.remove("hidden");
+
+        clearSearch();
         hideLoader();
     }, 80);
 };
+
+// animation for the counter
+const animateCount = (elementId, type, targetValue) => {
+
+    const element = document.getElementById(elementId);
+
+    if (typeof targetValue !== "number" || isNaN(targetValue)) {
+        element.innerText = 0;
+        return;
+    }
+
+    let start = 0;
+    const duration = 500;
+    const increment = targetValue / (duration / 16);
+    const counter = setInterval(() => {
+        start += increment;
+
+        if (start >= targetValue) {
+            element.innerText = targetValue;
+            clearInterval(counter);
+        } else {
+            element.innerText = Math.floor(start);
+        }
+        // changes count color dynamically while changing filter tabs
+        if (type === "open") {
+            element.classList.remove("text-black-800");
+            element.classList.remove("text-violet-600");
+            element.classList.add("text-green-600");
+        }
+        else if (type === "closed") {
+            element.classList.remove("text-black-800");
+            element.classList.remove("text-green-600");
+            element.classList.add("text-violet-600");
+        }
+        else if (type === "all") {
+            element.classList.remove("text-violet-600");
+            element.classList.remove("text-green-600");
+            element.classList.add("text-black-800");
+        }
+    }, 16);
+};
+
+// search function
+const handleSearch = (e) => {
+    const searchText = e.target.value.toLowerCase().trim();
+    console.log(searchText.length)
+
+    // filter issues by title
+    const matchedIssues = allIssuesData.filter(issue =>
+        issue.title.toLowerCase().includes(searchText)
+    );
+
+    if (matchedIssues.length === 0) {
+        const noIssue = document.getElementById("no-issue-container");
+        noIssue.classList.remove("hidden");
+
+        const issues = document.getElementById("issues-container")
+        issues.innerHTML = "";
+        issues.classList.add("hidden");
+        animateCount("issue-counter", matchedIssues.length);
+
+    }
+    else {
+        // show results on UI
+        displayIssues(matchedIssues);
+        const noIssue = document.getElementById("no-issue-container");
+        noIssue.classList.add("hidden");
+        const issues = document.getElementById("issues-container")
+        issues.classList.remove("hidden");
+    }
+
+
+    // remove active styles from buttons
+    const filterButtons = document.querySelectorAll(".filter-button");
+
+    filterButtons.forEach(button => {
+        button.classList.remove("bg-gray-700", "text-white");
+        button.classList.add("border-gray-700");
+    });
+
+    // if cleared searched text after searched for something, immediately All tab actives
+    if (searchText.length === 0) {
+        setActiveButton(allBtn);
+    }
+};
+
+const clearSearch = () => {
+    const searchBar = document.getElementById("search-bar");
+    searchBar.value = "";
+};
+
+// event listener on search bar
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener("input", handleSearch);
+
