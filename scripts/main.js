@@ -7,6 +7,9 @@ function handleSignIn() {
         alert('❌ Invalid credentials. Use admin / admin123');
     }
 }
+// global variable for storing fetched data from API
+let allIssuesData = [];
+
 // showloader
 const loadBox = document.getElementById("loader-container")
 const showLoader = () => {
@@ -17,7 +20,7 @@ const hideLoader = () => {
 };
 
 const allBtn = document.getElementById("allFilter-btn");
-const openBtn = document.getElementById("allFilter-btn");
+const openBtn = document.getElementById("openFilter-btn");
 const closedBtn = document.getElementById("closedFilter-btn");
 
 function setActiveButton(activeBtn) {
@@ -38,19 +41,28 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 // Fetch and display issues
-const loadAllIssues = () => {
+const loadAllIssues = async () => {
+
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
-    
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => { 
-            showLoader();
-            setTimeout(() => {
-                hideLoader();
-                displayIssues(data.data);
-            }, 400);
-        });
-        
+
+    try {
+        // show spinner first
+        showLoader();
+        const res = await fetch(url);
+        const data = await res.json();
+        // store globally
+        allIssuesData = data.data;
+        // display data
+        displayIssues(allIssuesData);
+
+    } catch (error) {
+        console.error(error);
+        alert("Failed to fetch issues");
+
+    } finally {
+        // always hide loader
+        hideLoader();
+    }
 };
 loadAllIssues();
 
@@ -134,7 +146,52 @@ const displayIssues = (issues) => {
                 </div>
         `;
         issuesContainer.appendChild(issueElement);
+        
+        const issueCount = allIssuesData.length;
+        const setCount = document.getElementById("issue-counter");
+        setCount.innerText = issueCount;
+
     });
 };
 
+// Filter Open button
+const openFilter = () => {
+    showLoader();
 
+    setTimeout(() => {
+        const openIssues = allIssuesData.filter(issue =>
+            issue.status.toLowerCase() === "open"
+        );
+        // display open issues on UI
+        displayIssues(openIssues);
+        // set active style
+        setActiveButton(openBtn);
+
+        const issueCount = openIssues.length;
+        const setCount = document.getElementById("issue-counter");
+        setCount.innerText = issueCount;
+
+        hideLoader();
+    }, 80);
+};
+
+// Closed filter button
+const closedFilter = () => {
+    showLoader();
+
+    setTimeout(() => {
+        const closedIssues = allIssuesData.filter(issue =>
+            issue.status.toLowerCase() === "closed"
+        );
+        // display closed issues on UI
+        displayIssues(closedIssues);
+        // set active style
+        setActiveButton(closedBtn);
+
+        const issueCount = closedIssues.length;
+        const setCount = document.getElementById("issue-counter");
+        setCount.innerText = issueCount;
+
+        hideLoader();
+    }, 80);
+};
