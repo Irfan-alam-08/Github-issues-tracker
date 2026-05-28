@@ -1,12 +1,3 @@
-function handleSignIn() {
-    const u = document.getElementById('username').value;
-    const p = document.getElementById('password').value;
-    if (u === 'admin' && p === 'admin123') {
-        alert('✅ Signed in successfully!');
-    } else {
-        alert('❌ Invalid credentials. Use admin / admin123');
-    }
-}
 // global variable for storing fetched data from API
 let allIssuesData = [];
 
@@ -54,12 +45,14 @@ const loadAllIssues = async () => {
         allIssuesData = data.data;
         // display data
         displayIssues(allIssuesData);
+    }
 
-    } catch (error) {
-        console.error(error);
-        alert("Failed to fetch issues");
+    // catch (error) {
+    //     console.error(error);
+    //     alert("Failed to fetch issues");
+    // } 
 
-    } finally {
+    finally {
 
         // re-render All issue cards while something is typed in searchbar
         const noIssue = document.getElementById("no-issue-container");
@@ -310,4 +303,14 @@ const clearSearch = () => {
 // event listener on search bar
 const searchBar = document.getElementById("search-bar");
 searchBar.addEventListener("input", handleSearch);
+
+// logout function
+const logout = () =>
+    {
+        document.body.classList.add("fade-out");
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 500);
+}
 

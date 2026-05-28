@@ -48,6 +48,9 @@
                     <button id="new-issue-btn" class="btn btn-primary">
                         <i class="fa-solid fa-plus"></i>
                         New Issue</button>
+                    <button onclick="logout()" id="logout-btn" class="btn text-xl text-gray-700">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
                 </div>
             </div>
         </nav>
@@ -55,9 +58,12 @@
     <!--Filter buttons -->
     <section class="w-9/12 mx-auto bg-white mt-10 rounded-md shadow-sm">
         <div class="flex gap-4 p-4 md:justify-start justify-center ">
-            <button onclick="setActiveButton(this); loadAllIssues()" id="allFilter-btn" class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">All</button>
-            <button onclick="setActiveButton(this); openFilter()" id="openFilter-btn" class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">Open</button>
-            <button onclick="setActiveButton(this); closedFilter()" id="closedFilter-btn" class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">Closed</button>
+            <button onclick="setActiveButton(this); loadAllIssues()" id="allFilter-btn"
+                class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">All</button>
+            <button onclick="setActiveButton(this); openFilter()" id="openFilter-btn"
+                class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">Open</button>
+            <button onclick="setActiveButton(this); closedFilter()" id="closedFilter-btn"
+                class="btn btn-outline filter-button min-w-20 border-gray-300 text-gray-600">Closed</button>
         </div>
     </section>
     <!-- Issues Header -->
@@ -74,26 +80,30 @@
         </div>
 
         <div class="flex gap-6 items-center">
-            <p class="flex gap-1 items-center"><i class="fa-solid fa-circle text-green-700 text-sm"></i>Open</p>
+            <p class="flex gap-1 items-center"><i class="fa-solid fa-circle text-green-600 text-sm"></i>Open</p>
             <p class="flex gap-1 items-center"><i class="fa-solid fa-circle text-violet-600 text-sm"></i>Closed</p>
         </div>
     </section>
 
+    <!-- loader -->
     <div id="loader-container" class="flex items-center justify-center w-9/12 mx-auto rounded-xl bg-base-200 p-40">
         <span class="loading loading-spinner text-error"></span>
     </div>
 
-    <div id="no-issue-container" class="flex items-center justify-center w-9/12 mx-auto rounded-xl bg-base-200 p-40 hidden">
-        <h3 class="text-3xl font-semibold text-gray-500">No issues found</h3>
+    <!-- No issues container -->
+    <div id="no-issue-container"
+        class="flex items-center justify-center w-9/12 mx-auto rounded-xl bg-base-200 p-40 hidden">
+        <h3 class="text-3xl font-semibold text-gray-500 text-center">No Issues Found</h3>
     </div>
 
     <!-- Issue cards section -->
-    <section id="issues-container" class="w-9/12 mx-auto rounded-xl p-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 bg-base-200">
-        
+    <section id="issues-container"
+        class="w-9/12 mx-auto rounded-xl p-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 bg-base-200">
+
     </section>
 
 </body>
 <!-- scripts -->
-<script src="./scripts/main.js"></script>
+<script src="./scripts/dashboard.js"></script>
 
 </html>

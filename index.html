@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Title and logo -->
     <title>Github Issues tracker</title>
-    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon" />
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -15,81 +15,111 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- font integration -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
         href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
 
     <!-- tailwind and daisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css" />
 </head>
 
-<body class="h-screen overflow-hidden bg-[#f3f4f6] p-3 sm:p-4 flex items-center justify-center">
+<body class="min-h-screen bg-[#f3f4f6] p-3 sm:p-4 flex items-center justify-center">
 
     <main
-        class="flex h-full h-11/12 mx-auto w-4/12  flex-col overflow-hidden rounded-lg bg-white px-7 py-6 shadow-[0_10px_26px_rgba(15,23,42,0.14)] sm:max-h-[calc(100dvh-32px)]">
+        class="flex w-full max-w-md flex-col overflow-hidden rounded-2xl bg-white px-5 sm:px-7 py-6 shadow-[0_10px_26px_rgba(15,23,42,0.14)]">
 
         <!-- Logo and heading -->
         <section class="flex flex-col items-center text-center">
             <div>
-                <img src="./assets/github-logo.png" alt="GitHub Logo" class="h-20 w-20 mb-2">
+                <img src="./assets/github-logo.png" alt="GitHub Logo" class="h-16 w-16 sm:h-20 sm:w-20 mb-2" />
             </div>
 
             <h1 class="text-[20px] font-semibold text-[#1f2937]">
                 GitHub Issues Tracker
             </h1>
-            <p class="text-[14px] text-[#64748b]">Sign in to manage your issues</p>
+
+            <p class="text-[14px] text-[#64748b]">
+                Sign in to manage your issues
+            </p>
         </section>
 
         <!-- Login form -->
-        <form class="mt-4 space-y-2" onsubmit="event.preventDefault(); handleSignIn();">
+        <form class="mt-5 space-y-3" onsubmit="event.preventDefault()">
+
+            <!-- Username -->
             <div class="form-control w-full">
                 <label class="label min-h-0 pb-1 pt-0" for="username">
-                    <span class="label-text text-[15px] font-semibold text-[#1f2937]">Username</span>
+                    <span class="label-text text-[15px] font-semibold text-[#1f2937]">
+                        Username
+                    </span>
                 </label>
+
                 <input id="username" type="text" placeholder="Enter Username" autocomplete="username"
-                    class="input input-bordered h-10 w-full rounded-lg border-[#d9dde5] bg-white px-[14px] text-[14px] text-[#1f2937] placeholder:text-[#64748b] focus:border-[#4f00ff] focus:outline-none" />
-                <p class="mt-1.5 text-[13px] leading-4 text-[#4f00ff]">Default: admin</p>
+                    class="input input-bordered h-11 w-full rounded-lg border-[#d9dde5] bg-white px-[14px] text-[14px] text-[#1f2937] placeholder:text-[#64748b] focus:border-[#4f00ff] focus:outline-none" />
+
+                <p class="mt-1.5 text-[13px] leading-4 text-[#4f00ff]">
+                    Default: admin
+                </p>
             </div>
 
+            <!-- Password -->
             <div class="form-control w-full">
                 <label class="label min-h-0 pb-1 pt-0" for="password">
-                    <span class="label-text text-[15px] font-semibold text-[#1f2937]">Password</span>
+                    <span class="label-text text-[15px] font-semibold text-[#1f2937]">
+                        Password
+                    </span>
                 </label>
+
                 <input id="password" type="password" placeholder="Enter Password" autocomplete="current-password"
-                    class="input input-bordered h-10 w-full rounded-lg border-[#d9dde5] bg-white px-[14px] text-[14px] text-[#1f2937] placeholder:text-[#64748b] focus:border-[#4f00ff] focus:outline-none" />
-                <p class="mt-1.5 text-[13px] leading-4 text-[#4f00ff]">Default: admin123</p>
+                    class="input input-bordered h-11 w-full rounded-lg border-[#d9dde5] bg-white px-[14px] text-[14px] text-[#1f2937] placeholder:text-[#64748b] focus:border-[#4f00ff] focus:outline-none" />
+
+                <p class="mt-1.5 text-[13px] leading-4 text-[#4f00ff]">
+                    Default: admin123
+                </p>
             </div>
 
-            <button type="submit"
-                class="btn mt-2 h-10 min-h-0 w-full rounded-lg border-0 bg-[#4f00ff] text-[14px] font-bold text-white shadow-none hover:bg-[#4300d8]">
+            <!-- Sign in button -->
+            <button id="loginBtn"
+                class="btn mt-2 h-11 min-h-0 w-full rounded-lg border-0 bg-[#4f00ff] text-[14px] font-bold text-white shadow-none hover:bg-[#4300d8]">
                 Sign In
             </button>
         </form>
 
         <!-- Divider -->
-        <div
-            class="divider mb-3 mt-4 text-[14px] font-normal text-[#1f2937] before:bg-[#e5e7eb] after:bg-[#e5e7eb]">
+        <div class="divider mb-3 mt-5 text-[14px] font-normal text-[#1f2937] before:bg-[#e5e7eb] after:bg-[#e5e7eb]">
             OR
         </div>
 
         <!-- Demo credentials -->
         <section class="text-center">
-            <p class="mb-2 text-[13px] text-[#64748b]">Demo Credentials:</p>
-            <div class="rounded-lg bg-[#f8fafc] px-5 py-5 text-[15px] leading-5 text-[#1f2937]">
-                <p><span class="font-bold">Username:</span> admin</p>
-                <p><span class="font-bold">Password:</span> admin123</p>
+            <p class="mb-2 text-[13px] text-[#64748b]">
+                Demo Credentials:
+            </p>
+
+            <div class="rounded-xl bg-[#f8fafc] px-5 py-5 text-[15px] leading-6 text-[#1f2937]">
+
+                <p>
+                    <span class="font-bold">Username:</span>
+                    admin
+                </p>
+
+                <p>
+                    <span class="font-bold">Password:</span>
+                    admin123
+                </p>
             </div>
         </section>
     </main>
-
-    <!-- scripts -->
-    <script src="./scripts/main.js"></script>
 </body>
+
+<!-- scripts -->
+    <script src="./scripts/login.js"></script>
 
 </html>
